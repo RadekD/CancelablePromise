@@ -2,7 +2,7 @@ import {
   assert,
   expect
 } from 'chai';
-import CancelablePromise from './CancelablePromise'
+import CancelablePromise from './dist/index'
 
 const createEnd = (done, total) => {
   let runned = 0;
@@ -218,6 +218,42 @@ describe(__filename, () => {
 
     const end = () => {
       if (!hasFailed) done();
+    };
+    setTimeout(end, 0);
+  });
+
+  it('should reject the promise when the success callback throws an error', (done) => {
+    const promise = new CancelablePromise((resolve, reject) => {
+      resolve('test123');
+    });
+    let hasFailed = true;
+
+    promise.then((value) => {
+      throw new Error('The callback threw an error');
+    }).catch((error) => {
+      hasFailed = false;
+    });
+
+    const end = () => {
+      done(hasFailed ? new Error('Promise should be rejected when the success callback throws an error') : undefined);
+    };
+    setTimeout(end, 0);
+  });
+
+  it('should reject the promise when the error callback throws an error', (done) => {
+    const promise = new CancelablePromise((resolve, reject) => {
+      reject(new Error('test123'));
+    });
+    let hasFailed = true;
+
+    promise.catch((error) => {
+      throw new Error('The callback threw an error');
+    }).catch((error) => {
+      hasFailed = false;
+    });
+
+    const end = () => {
+      done(hasFailed ? new Error('Promise should be rejected when the error callback throws an error') : undefined);
     };
     setTimeout(end, 0);
   });

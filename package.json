@@ -2,20 +2,21 @@
   "name": "cancelable-promise",
   "version": "2.3.0",
   "description": "A simple cancelable promise",
-  "main": "dist/CancelablePromise.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "mocha --opts mocha.opts",
-    "build": "babel -d dist/ CancelablePromise.js",
+    "build": "cd src; tsc",
     "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alkemics/CancelablePromise.git"
+    "url": "git+https://github.com/RadekD/CancelablePromise.git"
   },
   "author": "Alkemics",
   "license": "GPL-2.0",
   "bugs": {
-    "url": "https://github.com/alkemics/CancelablePromise/issues"
+    "url": "https://github.com/RadekD/CancelablePromise/issues"
   },
   "browserify": {
     "transform": [
@@ -24,15 +25,18 @@
   },
   "babel": {
     "presets": [
-      "es2015"
+      "es2015",
+      "es2016"
     ]
   },
-  "homepage": "https://github.com/alkemics/CancelablePromise#readme",
+  "homepage": "https://github.com/RadekD/CancelablePromise#readme",
   "devDependencies": {
     "babel-cli": "~6.16.0",
     "babel-core": "~6.17.0",
-    "babel-preset-es2015": "~6.16.0",
+    "babel-preset-es2015": "~6.24.1",
+    "babel-preset-es2016": "~6.24.1",
     "chai": "~3.5.0",
-    "mocha": "~3.1.2"
+    "mocha": "~3.1.2",
+    "typescript": "^2.5.2"
   }
 }
