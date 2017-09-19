@@ -1,3 +1,4 @@
+import * as Promise from "bluebird"
 export default class CancelablePromise<T> {
     static all(iterable) {
         return new CancelablePromise((y, n) => {
